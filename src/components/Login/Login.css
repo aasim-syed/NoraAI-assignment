@@ -110,3 +110,16 @@
 .auth-card p button:hover {
   text-decoration: underline;
 }
+.forgot-link {
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .forgot-link:hover {
+    color: #1d4ed8;
+  }
+  
