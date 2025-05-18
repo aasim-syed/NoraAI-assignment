@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
+import './UploadInterface.css';
 
 export default function UploadForm({ onStart }) {
   const [resumeFile, setResumeFile] = useState(null);
@@ -66,35 +67,35 @@ export default function UploadForm({ onStart }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 space-y-4">
-      {error && <div className="text-red-600">{error}</div>}
-      <div>
-        <label className="block mb-1 font-medium">Upload Resume (PDF/DOCX)</label>
-        <input
-          type="file"
-          accept=".pdf,.docx"
-          onChange={e => setResumeFile(e.target.files[0])}
-          className="block w-full"
-          required
-        />
-      </div>
-      <div>
-        <label className="block mb-1 font-medium">Upload Job Description (PDF/DOCX)</label>
-        <input
-          type="file"
-          accept=".pdf,.docx"
-          onChange={e => setJobDescFile(e.target.files[0])}
-          className="block w-full"
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        disabled={loading}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-      >
-        {loading ? 'Starting...' : 'Start Interview'}
-      </button>
-    </form>
+    <div className="upload-container">
+      <form onSubmit={handleSubmit} className="upload-card">
+        <h2>Upload Resume & Job Description</h2>
+        {error && <div className="error">{error}</div>}
+
+        <div className="form-group">
+          <label>Upload Resume (PDF/DOCX)</label>
+          <input
+            type="file"
+            accept=".pdf,.docx"
+            onChange={e => setResumeFile(e.target.files[0])}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Upload Job Description (PDF/DOCX)</label>
+          <input
+            type="file"
+            accept=".pdf,.docx"
+            onChange={e => setJobDescFile(e.target.files[0])}
+            required
+          />
+        </div>
+
+        <button type="submit" disabled={loading}>
+          {loading ? 'Starting...' : 'Start Interview'}
+        </button>
+      </form>
+    </div>
   );
 }

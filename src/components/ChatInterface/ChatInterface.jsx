@@ -1,6 +1,6 @@
 // src/components/ChatInterface.jsx
 import { useState, useEffect, useRef } from 'react';
-
+import "./Chatinterface.css"
 export default function ChatInterface({ sessionId }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput]       = useState('');
@@ -60,9 +60,9 @@ export default function ChatInterface({ sessionId }) {
   };
 
   return (
-    <div className="max-w-xl mx-auto flex flex-col h-screen p-4">
-      <div className="flex-1 overflow-y-auto space-y-3">
-        {messages.map((m, i) => (
+    <div className="chat-container">
+    <div className="chat-window">
+      {messages.map((m, i) => (
           <div
             key={i}
             className={`p-2 rounded ${
@@ -75,7 +75,7 @@ export default function ChatInterface({ sessionId }) {
         <div ref={bottomRef} />
       </div>
 
-      <div className="mt-4 flex items-center space-x-2">
+      <div className="chat-controls">
         <input
           type="text"
           className="flex-1 border rounded px-3 py-2"

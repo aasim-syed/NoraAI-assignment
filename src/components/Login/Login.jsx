@@ -1,7 +1,7 @@
 // src/components/AuthForm.jsx
 import { useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
-
+import "./Login.css"
 export default function AuthForm({ onAuth }) {
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
@@ -46,9 +46,8 @@ export default function AuthForm({ onAuth }) {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 px-4">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8 space-y-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800">
+    <div className="auth-container">
+    <div className="auth-card">        <h2 className="text-2xl font-bold text-center text-gray-800">
           {mode === 'signup' ? 'Create Account' : 'Welcome Back'}
         </h2>
         {error && (

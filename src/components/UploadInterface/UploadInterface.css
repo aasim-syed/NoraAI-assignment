@@ -1,0 +1,89 @@
+/* src/components/UploadForm.css */
+.upload-container {
+    height: 100vh;
+    width: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #e0f2fe, #e9d5ff);
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .upload-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    max-width: 480px;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  .upload-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .upload-card label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .upload-card input[type='file'] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    background-color: #f9fafb;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .upload-card input[type='file']:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+  
+  .upload-card .error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    border: 1px solid #fca5a5;
+  }
+  
+  .upload-card button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #2563eb;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upload-card button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .upload-card button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
