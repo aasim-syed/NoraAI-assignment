@@ -1,18 +1,17 @@
-// src/components/ChatInterface.jsx
 import { useState, useEffect, useRef } from 'react';
-import "./Chatinterface.css"
+import "./Chatinterface.css";
+
 export default function ChatInterface({ sessionId }) {
   const [messages, setMessages] = useState([]);
-  const [input, setInput]       = useState('');
-  const [loading, setLoading]   = useState(false);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showThanks, setShowThanks] = useState(false); // ✅ new state
   const bottomRef = useRef(null);
 
-  // Scroll to bottom when new message arrives
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Fetch initial question
   useEffect(() => {
     const fetchFirst = async () => {
       try {
@@ -40,7 +39,7 @@ export default function ChatInterface({ sessionId }) {
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId, answer: input })
+          body: JSON.stringify({ sessionId, answer: input }),
         }
       );
       const aiMsg = await res.json();
@@ -54,22 +53,39 @@ export default function ChatInterface({ sessionId }) {
     }
   };
 
-  const endInterview = () => {
-    // You might navigate to a feedback page, or fetch feedback here
-    window.location.href = `/feedback?sessionId=${sessionId}`;
+  const endInterview = async () => {
+    // ✅ (1) Show thank you message
+    setShowThanks(true);
+
+    // ✅ (2) Optional: Send confirmation email to user
+    try {
+      await fetch('/api/send-confirmation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId }), // or email if known
+      });
+    } catch (err) {
+      console.error('Failed to send confirmation email:', err);
+    }
   };
+
+  // ✅ Show "Thank You" screen instead of chat
+  if (showThanks) {
+    return (
+      <div className="chat-container" style={{ textAlign: 'center', paddingTop: '20vh' }}>
+        <h2>✅ Thank you for taking the interview!</h2>
+        <p>We’ll get back to you shortly via email.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="chat-container">
-    <div className="chat-window">
-      {messages.map((m, i) => (
-          <div
-            key={i}
-            className={`p-2 rounded ${
-              m.role === 'ai' ? 'bg-gray-100 self-start' : 'bg-blue-100 self-end'
-            }`}
-          >
-            <strong>{m.role === 'ai' ? 'AI' : 'You'}:</strong> {m.content}
+      <div className="chat-window">
+        {messages.map((m, i) => (
+          <div key={i} className={`chat-bubble ${m.role === 'ai' ? 'ai' : 'user'}`}>
+            <div className="chat-meta">{m.role === 'ai' ? 'AI' : 'You'}</div>
+            <div className="chat-text">{m.content}</div>
           </div>
         ))}
         <div ref={bottomRef} />
@@ -78,26 +94,14 @@ export default function ChatInterface({ sessionId }) {
       <div className="chat-controls">
         <input
           type="text"
-          className="flex-1 border rounded px-3 py-2"
-          placeholder="Type your answer..."
+          placeholder="Type your answer and press Enter..."
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && sendAnswer()}
           disabled={loading}
         />
-        <button
-          onClick={sendAnswer}
-          disabled={loading}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
-        >
-          Send
-        </button>
-        <button
-          onClick={endInterview}
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-        >
-          End
-        </button>
+        <button onClick={sendAnswer} disabled={loading}>Send</button>
+        <button className="end-btn" onClick={endInterview}>End</button>
       </div>
     </div>
   );
