@@ -31,13 +31,13 @@ export default function AuthForm() {
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${redirectBase}/dashboard` },
+          options: { emailRedirectTo: `${redirectBase}/upload` },
         });
         if (error) throw error;
         if (!data.session) {
           setMessage('Sign-up successful! Check your email to confirm.');
         } else {
-          window.location.href = `${redirectBase}/dashboard`;
+          window.location.href = `${redirectBase}/upload`;
         }
       } else if (mode === 'login') {
         const {  error } = await supabase.auth.signInWithPassword({
@@ -45,7 +45,7 @@ export default function AuthForm() {
           password,
         });
         if (error) throw error;
-        window.location.href = `${redirectBase}/dashboard`;
+        window.location.href = `${redirectBase}/upload`;
       } else if (mode === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: `${redirectBase}/reset-password`,

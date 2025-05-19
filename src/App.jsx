@@ -13,6 +13,7 @@ import { supabase } from './lib/supabaseClient';
 import Login from './components/Login/Login';
 import UploadForm from './components/UploadInterface/UploadInterface';
 import ChatInterface from './components/ChatInterface/ChatInterface';
+import ResetPassword from './components/ResetPassword/ResetPassword';
 
 // A wrapper that starts the interview and navigates to Chat
 function UploadWrapper() {
@@ -80,7 +81,7 @@ export default function App() {
         />
 
         {/* Reset password route (if needed) */}
-        {/* <Route path="/reset-password" element={<ResetPasswordForm />} /> */}
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Fallback 404 */}
         <Route path="*" element={<h2 style={{ padding: "2rem", textAlign: "center" }}>404 - Page Not Found</h2>} />
