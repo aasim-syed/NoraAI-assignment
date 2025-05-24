@@ -9,7 +9,7 @@ const router = express.Router();
 // Read from env
 const MOCK_MODE = process.env.MOCK_MODE === 'true';
 const supabase  = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
-const openai    = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai    = new OpenAI({ apiKey: process.env.OPENAI_API_KEY ,baseURL: process.env.DEEPSEEK_BASE_URL });
 
 /**
  * POST /api/interview/start
@@ -78,7 +78,7 @@ router.get('/question', async (req, res) => {
   // REAL MODE
   try {
     const chat = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'deepseek-chat',
       messages: [
         { role: 'system', content: 'You are an interview coach.' },
         { role: 'system', content: 'Generate the first interview question based on the resume & job description.' }

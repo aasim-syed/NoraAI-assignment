@@ -124,4 +124,19 @@
   .chat-controls .end-btn:hover {
     background-color: #b91c1c;
   }
+  .chat-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .chat-controls input {
+    flex: 1;
+    padding: 0.5rem;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
   
