@@ -1,88 +1,127 @@
-/* src/components/AuthForm.css */
+/* Reset & Base */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-.auth-container {
-  height: 100dvh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #e0f2fe, #e9d5ff);
-  padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at 25% 25%, #6366f1 0%, transparent 40%),
+  radial-gradient(circle at 75% 75%, #ec4899 0%, transparent 40%);
+  
 }
 
+
+/* Container */
+@keyframes floatGradient {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10%, -10%) scale(1.1);
+  }
+  50% {
+    transform: translate(-10%, 10%) scale(1.05);
+  }
+  75% {
+    transform: translate(5%, -5%) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+
+/* Card */
 .auth-card {
-  background: #ffffff;
+  background-color: #ffffff;
   padding: 2.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
   max-width: 400px;
   width: 100%;
   transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
 }
 
+
+
+/* Heading */
 .auth-card h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: 1.625rem;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #1f2937;
+  color: #111827;
 }
 
+/* Labels */
 .auth-card label {
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.4rem;
   font-weight: 500;
   color: #374151;
+  font-size: 0.95rem;
 }
 
+/* Inputs */
 .auth-card input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.2rem;
   border: 1px solid #d1d5db;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #f9fafb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .auth-card input:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+/* Error & Success */
+.auth-card .error,
+.auth-card .success {
+  font-size: 0.875rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .auth-card .error {
-  background-color: #fee2e2;
+  background-color: #fef2f2;
   color: #b91c1c;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 0.85rem;
-  text-align: center;
-  margin-bottom: 1rem;
   border: 1px solid #fca5a5;
 }
 
+.auth-card .success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #34d399;
+}
+
+/* Submit Button */
 .auth-card button[type='submit'] {
   width: 100%;
   padding: 0.75rem;
-  background-color: #2563eb;
+  background-color: #111827;
   color: white;
   font-weight: 600;
   border: none;
-  border-radius: 0.75rem;
+  border-radius: 0.65rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .auth-card button[type='submit']:hover {
-  background-color: #1d4ed8;
+  background-color: #1f2937;
 }
 
 .auth-card button[type='submit']:disabled {
@@ -90,36 +129,40 @@
   cursor: not-allowed;
 }
 
+/* Link Buttons */
 .auth-card p {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: #6b7280;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
 
 .auth-card p button {
   background: none;
   border: none;
-  color: #2563eb;
+  color: #4f46e5;
   font-weight: 500;
   cursor: pointer;
   margin-left: 0.25rem;
   transition: text-decoration 0.2s;
+  font-size: 0.875rem;
 }
 
 .auth-card p button:hover {
   text-decoration: underline;
 }
+
 .forgot-link {
-    background: none;
-    border: none;
-    color: #2563eb;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  .forgot-link:hover {
-    color: #1d4ed8;
-  }
-  
+  background: none;
+  border: none;
+  color: #4f46e5;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.forgot-link:hover {
+  color: #3730a3;
+}

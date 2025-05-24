@@ -63,6 +63,9 @@ export default function AuthForm() {
   return (
     <div className="auth-container">
       <div className="auth-card">
+      <h2>
+      Nora AI assignment
+    </h2>
         <h2>
           {mode === 'signup'
             ? 'Create Account'

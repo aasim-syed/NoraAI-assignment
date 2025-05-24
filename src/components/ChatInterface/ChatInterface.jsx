@@ -7,6 +7,7 @@ export default function ChatInterface({ sessionId }) {
   const [loading, setLoading] = useState(false);
   const [showThanks, setShowThanks] = useState(false); // ✅ new state
   const bottomRef = useRef(null);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -80,7 +81,13 @@ export default function ChatInterface({ sessionId }) {
   }
 
   return (
-    <div className="chat-container">
+    <div className={`chat-container ${darkMode ? 'dark' : 'light'}`}>
+    <div className="theme-toggle">
+        <button onClick={() => setDarkMode(!darkMode)}>
+          {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+        </button>
+      </div>
+
       <div className="chat-window">
         {messages.map((m, i) => (
           <div key={i} className={`chat-bubble ${m.role === 'ai' ? 'ai' : 'user'}`}>
@@ -90,6 +97,7 @@ export default function ChatInterface({ sessionId }) {
         ))}
         <div ref={bottomRef} />
       </div>
+
 
       <div className="chat-controls">
         <input

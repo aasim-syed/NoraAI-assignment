@@ -10,9 +10,8 @@
 /* Set base font and layout */
 html, body {
   height: 100%;
-  width: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #e0f2fe, #e9d5ff);
+  background: #0f172a;
 
   color: #1f2937;
   -webkit-font-smoothing: antialiased;
@@ -36,9 +35,7 @@ a {
   color: inherit;
 }
 
-button {
-  font-family: inherit;
-}
+
 
 /* Utility classes */
 .hidden {
