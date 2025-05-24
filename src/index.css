@@ -11,11 +11,7 @@
 html, body {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0f172a;
 
-  color: #1f2937;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
@@ -32,7 +28,6 @@ html, body {
 /* Optional global link and button styles */
 a {
   text-decoration: none;
-  color: inherit;
 }
 
 
