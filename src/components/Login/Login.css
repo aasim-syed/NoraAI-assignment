@@ -8,10 +8,39 @@
 body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at 25% 25%, #6366f1 0%, transparent 40%),
-  radial-gradient(circle at 75% 75%, #ec4899 0%, transparent 40%);
-  
+  background-color: #0f172a; /* dark navy base */
+  overflow: hidden;
+  position: relative;
 }
+.background-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 300%;
+  animation: moveGlow 90s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(45px);
+  transition: background 0.1s ease-out;
+}
+
+
+
+@keyframes moveGlow {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-150px, -100px);
+  }
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+}
+
 
 
 /* Container */

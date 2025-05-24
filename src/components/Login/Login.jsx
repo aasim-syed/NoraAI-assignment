@@ -1,16 +1,33 @@
-import { useState } from 'react';
+import { useState , useRef , useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import "./Login.css";
 
 export default function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [mode, setMode] = useState('login'); // login | signup | forgot
+  const [mode, setMode] = useState('login');
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const redirectBase = window.location.origin;
+  const backgroundRef = useRef(null);
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+
+      if (backgroundRef.current) {
+        backgroundRef.current.style.background = `
+          radial-gradient(circle at ${x}% ${y}%, rgba(99, 102, 241, 0.25) 0%, transparent 50%),
+          radial-gradient(circle at ${100 - x}% ${100 - y}%, rgba(236, 72, 153, 0.18) 0%, transparent 50%)
+        `;
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -61,7 +78,9 @@ export default function AuthForm() {
   };
 
   return (
+    
     <div className="auth-container">
+    <div className="background-pattern" ref={backgroundRef}></div>
       <div className="auth-card">
       <h2>
       Nora AI assignment
