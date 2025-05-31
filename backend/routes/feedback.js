@@ -26,8 +26,8 @@ router.get('/', async (req, res) => {
     // mock fallback
     if (MOCK_MODE) {
       const mockFB = `
-**Strengths:** You communicated clearly and gave strong examples.
-**Areas to improve:** Try adding more metrics and quantifiable results next time.
+Strengths: You communicated clearly and gave strong examples.
+Areas to improve: Try adding more metrics and quantifiable results next time.
 `;
       await supabase
         .from('feedback')
@@ -61,8 +61,8 @@ router.get('/', async (req, res) => {
     console.error('❌ /feedback error:', err);
     // fallback
     const mockFB = `
-**Strengths:** You communicated clearly and gave strong examples.
-**Areas to improve:** Try adding more metrics and quantifiable results next time.
+Strengths: You communicated clearly and gave strong examples.
+Areas to improve: Try adding more metrics and quantifiable results next time.
 `;
     await supabase
       .from('feedback')

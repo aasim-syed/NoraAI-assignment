@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import "./Chatinterface.css";
-
-export default function ChatInterface({ sessionId }) {
+import FeedbackSummary from '../FeedbackSummary/Feedbacksummary';
+export default function ChatInterface({ sessionId , onFinishInterview }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -57,7 +57,10 @@ export default function ChatInterface({ sessionId }) {
   const endInterview = async () => {
     // ✅ (1) Show thank you message
     setShowThanks(true);
-
+  // ✅ Trigger feedback display in parent
+  if (onFinishInterview) {
+    onFinishInterview();
+  }
     // ✅ (2) Optional: Send confirmation email to user
     try {
       await fetch('/api/send-confirmation', {
@@ -73,10 +76,14 @@ export default function ChatInterface({ sessionId }) {
   // ✅ Show "Thank You" screen instead of chat
   if (showThanks) {
     return (
-      <div className="chat-container" style={{ textAlign: 'center', paddingTop: '20vh' }}>
-        <h2>✅ Thank you for taking the interview!</h2>
-        <p>We’ll get back to you shortly via email.</p>
+    <div className="chat-container" style={{ textAlign: 'center', paddingTop: '10vh' }}>
+      <h2>✅ Thank you for taking the interview!</h2>
+      <p>We’ll get back to you shortly via email.</p>
+
+      <div style={{ marginTop: '2rem', maxWidth: '600px', marginInline: 'auto' }}>
+        <FeedbackSummary sessionId={sessionId} />
       </div>
+    </div>
     );
   }
 

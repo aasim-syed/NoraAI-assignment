@@ -29,7 +29,14 @@ function UploadWrapper() {
 // A wrapper to extract sessionId param for Chat
 function ChatWrapper() {
   const { sessionId } = useParams();
-  return <ChatInterface sessionId={sessionId} />;
+  const [showFeedback, setShowFeedback] = useState(false);
+console.log("showFeedback")
+console.log(showFeedback)
+  return (
+    <>
+      <ChatInterface sessionId={sessionId} onFinishInterview={() => setShowFeedback(true)} />
+    </>
+  );
 }
 
 export default function App() {
